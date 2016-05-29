@@ -2,12 +2,25 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
+var multer  =   require('multer');
+
+var storage =   multer.diskStorage({
+	destination: function (req, file, callback) {
+		callback(null, './uploads');
+	},
+	filename: function (req, file, callback) {
+		const originalname = file.originalname;
+		let name = originalname.substr(0, originalname.lastIndexOf('.'));
+		let extension = originalname.substr(originalname.lastIndexOf('.') + 1);
+		callback(null, `${name}-${Date.now()}.${extension}`);
+	}
+});
+var upload = multer({ storage : storage }).any();
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-
-var db;
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 function dbConnect(callback) {
 	pg.defaults.ssl = true;
@@ -20,26 +33,26 @@ function dbConnect(callback) {
 			});
 }
 
-app.get('/', function (request, response) {
-	response.sendFile(__dirname + '/views/index.html');
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/api/patient', function (request, response) {
-	var requestQuest = request.query;
+app.get('/api/patient', function (req, res) {
+	var reqQuest = req.query;
 	var results = [];
 
 	dbConnect((client) => {
 		function done() {
 			client.end();
-			response.end();
+			res.end();
 		}
 
 		var query = client.query(
 				"SELECT * FROM patient WHERE name ILIKE ($1) AND doctor ILIKE ($2) AND hospital_code ILIKE ($3)",
 				[
-					`%${requestQuest.name || ''}%`,
-					`%${requestQuest.doctor || ''}%`,
-					`%${requestQuest.hospitalCode || ''}%`
+					`%${reqQuest.name || ''}%`,
+					`%${reqQuest.doctor || ''}%`,
+					`%${reqQuest.hospitalCode || ''}%`
 				]);
 
 		query.on('row', function(row) {
@@ -47,16 +60,25 @@ app.get('/api/patient', function (request, response) {
 		});
 
 		query.on('end', function() {
-			response.json(results);
+			res.json(results);
 			done();
 		});
 
 	});
 });
 
+app.get('/upload', function (req, res) {
+	res.sendFile(__dirname + '/views/upload.html');
+});
 
-app.get('/db-test', function (request, response) {
+app.post('/upload', function (req, res) {
 
+	upload(req,res,function(err) {
+		if(err) {
+			return res.end("Error uploading file.");
+		}
+		res.end("File is uploaded");
+	});
 
 });
 
