@@ -21,7 +21,8 @@
     "url": "https://github.com/A-Lomaieva/medical/issues"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "4.0.0",
+    "npm": "3.5.2"
   },
   "homepage": "https://github.com/A-Lomaieva/medical#readme"
 }
