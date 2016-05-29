@@ -19,11 +19,6 @@ function dbConnect(callback) {
 				callback(client);
 			});
 }
-function dbClose(client) {
-	client.end();
-}
-
-
 
 app.get('/', function (request, response) {
 	response.sendFile(__dirname + '/views/index.html');
