@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.3.16",
     "express": "^4.13.4",
+    "moment": "^2.13.0",
     "multer": "^1.1.0",
-    "pg": "4.5.5"
+    "pg": "4.5.5",
+    "qs": "^6.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "bootstrap": "^3.3.6",
+    "qs": "^6.2.0"
+  },
   "scripts": {
-    "start": "node index.js",
-    "start-watch": "nodemon index.js",
+    "start": "node app/index.js",
+    "start-watch": "nodemon app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.16.min.js"></script>
+  <script type="text/javascript">
+    // See the Configuring section to configure credentials in the SDK
+    AWS.config.update({accessKeyId: 'AKIAIIYO2U4VMRGD2ICQ', secretAccessKey: 'hBPL/ve94YnT00xRusVoXJ9ulo+pdbZz7/Xa22/W'});
+
+    // Configure your region
+    AWS.config.region = 'eu-west-1';
+  </script>
+</head>
+<body>
+<form action="/upload" method="post" enctype="multipart/form-data">
+	<input type="file" name="file">
+	<input type="submit">
+</form>
+<br><br><br>
+
+
+<input type="file" id="file-chooser" />
+<button id="upload-button">Upload to S3</button>
+<div id="results"></div>
+
+<script type="text/javascript">
+  var bucket = new AWS.S3({params: {Bucket: 'lomaieva-medical'}});
+
+  var fileChooser = document.getElementById('file-chooser');
+  var button = document.getElementById('upload-button');
+  var results = document.getElementById('results');
+  button.addEventListener('click', function() {
+    var file = fileChooser.files[0];
+    if (file) {
+      results.innerHTML = '';
+
+      var params = {Key: file.name, ContentType: file.type, Body: file};
+      console.log(params);
+      bucket.upload(params, function (err, data) {
+        results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
+      });
+    } else {
+      results.innerHTML = 'Nothing to upload.';
+    }
+  }, false);
+</script>
+
+</body>
+</html>
