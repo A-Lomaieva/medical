@@ -75,7 +75,7 @@ router
 
     });
   })
-  .put('/:id', function (req, res) {
+  .post('/:id', function (req, res) {
     var id = req.params.id;
     parsePost(req, (data) => {
       dbConnect((client) => {
