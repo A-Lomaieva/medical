@@ -6,15 +6,11 @@
   "dependencies": {
     "aws-sdk": "^2.3.16",
     "express": "^4.13.4",
-    "moment": "^2.13.0",
-    "multer": "^1.1.0",
     "pg": "4.5.5",
-    "qs": "^6.2.0"
+    "qs": "^6.2.0",
+    "bootstrap": "^3.3.6"
   },
-  "devDependencies": {
-    "bootstrap": "^3.3.6",
-    "qs": "^6.2.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "node app/index.js",
     "start-watch": "nodemon app/index.js",
