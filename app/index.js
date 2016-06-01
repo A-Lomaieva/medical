@@ -28,10 +28,19 @@ app.use('/uploads', express.static(__dirname + '/../uploads'));
 app.use('/css', express.static(__dirname + '/../node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/../node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/../node_modules/jquery/dist'));
+app.use('/js', express.static(__dirname + '/../node_modules/angular'));
+app.use('/js', express.static(__dirname + '/../node_modules/angular'));
+app.use('/js', express.static(__dirname + '/../node_modules/angular-route'));
+
+app.use('/admin', express.static(__dirname + '/admin'));
 
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get('/admin', function (req, res) {
+  res.sendFile(__dirname + '/views/admin.html');
 });
 
 app.get('/upload', function (req, res) {
