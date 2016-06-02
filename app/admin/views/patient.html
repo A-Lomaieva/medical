@@ -1,1 +1,50 @@
-dfgsdfg
+<div class="patient">
+  <h3>Patients</h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Doctor</td>
+      <td>Hospital Code</td>
+      <td>Diseases</td>
+      <td>Birthdate</td>
+      <td>Allergies</td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in items">
+      <td>{{item.name}}</td>
+      <td>{{item.doctor}}</td>
+      <td>{{item.hospitalCode}}</td>
+      <td>{{item.diseases}}</td>
+      <td>{{item.birthdate}}</td>
+      <td>{{item.allergies}}</td>
+      <td><button class="btn btn-danger" ng-click="delete(item)">delete</button></td>
+    </tr>
+    <tr ng-form="form">
+      <td class="form-group" ng-class="{ 'has-error': form.name.$invalid }">
+        <input type="text" class="form-control" placeholder="Name" name="name" ng-model="newItem.name" required>
+      </td>
+      <td class="form-group" ng-class="{ 'has-error': form.doctor.$invalid }">
+        <input type="text" class="form-control" placeholder="Doctor" name="doctor" ng-model="newItem.doctor" required>
+      </td>
+      <td class="form-group" ng-class="{ 'has-error': form.hospitalCode.$invalid }">
+        <input type="text" class="form-control" placeholder="Hospital Code" name="hospitalCode" ng-model="newItem.hospitalCode" required>
+      </td>
+      <td class="form-group" ng-class="{ 'has-error': form.diseases.$invalid }">
+        <input type="text" class="form-control" placeholder="Diseases" name="diseases" ng-model="newItem.diseases">
+      </td>
+      <td class="form-group" ng-class="{ 'has-error': form.birthdate.$invalid }">
+        <input type="date" class="form-control" placeholder="Birthdate" name="birthdate" ng-model="newItem.birthdate">
+      </td>
+      <td class="form-group" ng-class="{ 'has-error': form.allergies.$invalid }">
+        <input type="text" class="form-control" placeholder="Allergies" name="allergies" ng-model="newItem.allergies">
+      </td>
+      <td>
+        <button class="btn btn-primary" ng-click="add()">Add</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

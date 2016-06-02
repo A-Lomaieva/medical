@@ -1,7 +1,40 @@
 'use strict';
 
 angular.module('Medical')
+  .factory('Patient', function($resource) {
+    return $resource(
+      '/api/patient/:id',
+      { id: '@id' },
+      {'query': { method: 'GET' }}
+    );
+  })
+  .controller('PatientCtrl', ['$scope', 'Patient', function ($scope, Patient) {
+    $scope.items = [];
+    $scope.newItem = {};
 
-  .controller('PatientCtrl', [function() {
-    
+    $scope.fetch = () => {
+      Patient.query((data) => {
+        $scope.items = data.items;
+      });
+    };
+    $scope.fetch();
+
+    $scope.add = () => {
+      if ($scope.form.$valid) {
+        var patient = new Patient($scope.newItem);
+        patient.$save(() => {
+          $scope.fetch();
+          $scope.newItem = {};
+        });
+      } else {
+        alert('Invalid form!');
+      }
+    };
+
+    $scope.delete = (item) => {
+      if (confirm('Are you sure?')) {
+        var patient = new Patient(item);
+        patient.$delete($scope.fetch);
+      }
+    }
   }]);

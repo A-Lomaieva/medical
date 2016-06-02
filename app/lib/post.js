@@ -10,7 +10,7 @@ function parsePost(req, callback) {
   });
 
   req.on('end', function () {
-    var post = qs.parse(body);
+    var post = JSON.parse(body);
     callback(post);
   });
 }

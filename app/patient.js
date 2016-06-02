@@ -100,6 +100,25 @@ router
         });
       });
     });
+  })
+  .delete('/:id', function (req, res) {
+    var id = req.params.id;
+    dbConnect((client) => {
+      function done() {
+        client.end();
+        res.end();
+      }
+
+      var query = client.query(
+        "DELETE FROM patient WHERE id=($1)",
+        [id]
+      );
+
+      query.on('end', function () {
+        res.json({success: true});
+        done();
+      });
+    });
   });
 
 module.exports = router;

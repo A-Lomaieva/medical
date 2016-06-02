@@ -14,6 +14,7 @@ app.use('/js', express.static(__dirname + '/../node_modules/bootstrap/dist/js'))
 app.use('/js', express.static(__dirname + '/../node_modules/jquery/dist'));
 app.use('/js', express.static(__dirname + '/../node_modules/angular'));
 app.use('/js', express.static(__dirname + '/../node_modules/angular-route'));
+app.use('/js', express.static(__dirname + '/../node_modules/angular-resource'));
 
 app.use('/admin', express.static(__dirname + '/admin'));
 
