@@ -4,6 +4,13 @@ var express = require('express');
 var router = express.Router();
 var dbConnect = require('./lib/db');
 var parsePost = require('./lib/post');
+var moment = require('moment');
+
+function formatItem(item) {
+  var date = moment(item.birthdate);
+  item.birthdate = date.format('MM/DD/YYYY');
+  return item;
+}
 
 router
   .post('/', function (req, res) {
@@ -38,7 +45,7 @@ router
       }
 
       var query = client.query(
-        "SELECT * FROM patient WHERE name ILIKE ($1) AND doctor ILIKE ($2) AND hospital_code ILIKE ($3)",
+        "SELECT * FROM patient WHERE name ILIKE ($1) AND doctor ILIKE ($2) AND hospital_code ILIKE ($3) ORDER BY id ASC",
         [
           `%${reqQuest.name || ''}%`,
           `%${reqQuest.doctor || ''}%`,
@@ -46,7 +53,7 @@ router
         ]);
 
       query.on('row', function (row) {
-        items.push(row);
+        items.push(formatItem(row));
       });
 
       query.on('end', function (result) {
@@ -68,7 +75,7 @@ router
       var query = client.query("SELECT * FROM patient WHERE id = $1", [id]);
 
       query.on('row', function (row) {
-        res.json({item: row});
+        res.json({item: formatItem(row)});
       });
 
       query.on('end', done);
