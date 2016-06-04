@@ -1,0 +1,15 @@
+<div class="login">
+  <h3>Login</h3>
+  <div ng-form="form">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" name="username" ng-model="user.username" required>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Password" name="password" ng-model="user.password" required>
+    </div>
+    <div class="form-group">
+      <button class="btn" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary" ng-click="login()">Login</button>
+    </div>
+  </div>
+</div>

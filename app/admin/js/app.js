@@ -10,5 +10,9 @@ angular.module('Medical', [
       templateUrl: 'views/patient.html',
       controller: 'PatientCtrl'
     })
-    .otherwise({redirectTo: '/patient'});
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl'
+    })
+    .otherwise({redirectTo: '/login'});
 }]);

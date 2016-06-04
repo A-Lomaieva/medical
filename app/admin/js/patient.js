@@ -8,7 +8,10 @@ angular.module('Medical')
       {'query': { method: 'GET' }}
     );
   })
-  .controller('PatientCtrl', ['$scope', 'Patient', function ($scope, Patient) {
+  .controller('PatientCtrl', ['$scope', 'Patient', 'User', '$location', function ($scope, Patient, User, $location) {
+    if (!User.isAdmin) {
+      // $location.path('/login');
+    }
     $scope.items = [];
     $scope.newItem = {};
 
