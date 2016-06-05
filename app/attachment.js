@@ -38,6 +38,8 @@ router
           res.json({success: true});
           done();
         });
+
+        dbConnect.catchError(query, res);
       });
     });
   })
@@ -65,6 +67,7 @@ router
         done();
       });
 
+      dbConnect.catchError(query, res);
     });
   })
   .get('/:id', function (req, res) {
@@ -84,6 +87,7 @@ router
 
       query.on('end', done);
 
+      dbConnect.catchError(query, res);
     });
   })
   .post('/:id', function (req, res) {
@@ -109,6 +113,8 @@ router
           res.json({success: true});
           done();
         });
+
+        dbConnect.catchError(query, res);
       });
     });
   })
@@ -129,6 +135,8 @@ router
         res.json({success: true});
         done();
       });
+
+      dbConnect.catchError(query, res);
     });
   });
 

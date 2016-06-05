@@ -19,7 +19,7 @@
 </td>
 <td>
   <button ng-if="changedItem.id" class="btn btn-primary" ng-click="form.$valid && onSave(changedItem)">save</button>
-  <button ng-if="!changedItem.id" class="btn btn-primary" ng-click="form.$valid && onSave(changedItem)">add</button>
+  <button ng-if="!changedItem.id" class="btn btn-primary" ng-click="onSave(changedItem)">add</button>
 </td>
 <td>
   <button class="btn btn-default" ng-click="toggleEdit()" ng-if="changedItem.id">cancel</button>

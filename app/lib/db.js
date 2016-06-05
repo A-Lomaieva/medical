@@ -10,6 +10,12 @@ function dbConnect(callback) {
       console.log('Connected to postgres!');
       callback(client);
     });
+}
+
+dbConnect.catchError = function(query, res) {
+  query.on('error', function() {
+    res.status(500).send('Oops! Some error happened');
+  });
 };
 
 module.exports = dbConnect;
