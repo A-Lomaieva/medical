@@ -10,6 +10,10 @@ angular.module('Medical', [
       templateUrl: 'views/patient.html',
       controller: 'PatientCtrl'
     })
+    .when('/patient/:id/attachments', {
+      templateUrl: 'views/attachment.html',
+      controller: 'AttachmentCtrl'
+    })
     .when('/login', {
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'

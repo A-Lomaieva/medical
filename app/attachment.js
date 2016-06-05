@@ -7,8 +7,8 @@ var parsePost = require('./lib/post');
 var moment = require('moment');
 
 function formatItem(item) {
-  var date = moment(item.birthdate);
-  item.birthdate = date.format('MM/DD/YYYY');
+  var date = moment(item.date);
+  item.date = date.format('MM/DD/YYYY');
   return item;
 }
 
@@ -22,9 +22,9 @@ router
         }
 
         var query = client.query(
-          "INSERT INTO patient(name, doctor, hospital_code, diseases, birthdate, allergies) " +
-          "values($1, $2, $3, $4, $5, $6)",
-          [data.name, data.doctor, data.hospitalCode, data.diseases, data.birthdate, data.allergies]
+          "INSERT INTO public.attachment(patient_id, url, name, date) " +
+          "values($1, $2, $3, $4)",
+          [data.patientId, data.url, data.name, data.date]
         );
 
         query.on('end', function () {
@@ -45,12 +45,9 @@ router
       }
 
       var query = client.query(
-        "SELECT * FROM patient WHERE name ILIKE ($1) AND doctor ILIKE ($2) AND hospital_code ILIKE ($3) ORDER BY id ASC",
-        [
-          `%${reqQuery.name || ''}%`,
-          `%${reqQuery.doctor || ''}%`,
-          `%${reqQuery.hospitalCode || ''}%`
-        ]);
+        "SELECT * FROM public.attachment WHERE patient_id = ($1) ORDER BY date ASC",
+        [ reqQuery.patientId ]
+      );
 
       query.on('row', function (row) {
         items.push(formatItem(row));
@@ -72,7 +69,7 @@ router
         res.end();
       }
 
-      var query = client.query("SELECT * FROM patient WHERE id = $1", [id]);
+      var query = client.query("SELECT * FROM public.attachment WHERE id = $1", [id]);
 
       query.on('row', function (row) {
         res.json({item: formatItem(row)});
@@ -92,11 +89,11 @@ router
         }
 
         var query = client.query(
-          "UPDATE patient " +
-          "SET name=($1), doctor=($2), hospital_code=($3), diseases=($4), birthdate=($5), allergies=($6) " +
-          "WHERE id=($7)",
+          "UPDATE public.attachment " +
+          "SET url=($1), name=($2), date=($3) " +
+          "WHERE id=($4)",
           [
-            data.name, data.doctor, data.hospitalCode, data.diseases, data.birthdate, data.allergies,
+            data.url, data.name, data.date,
             id
           ]
         );
@@ -117,7 +114,7 @@ router
       }
 
       var query = client.query(
-        "DELETE FROM patient WHERE id=($1)",
+        "DELETE FROM public.attachment WHERE id=($1)",
         [id]
       );
 

@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 
 var patient = require('./patient');
+var attachment = require('./attachment');
 var user = require('./user');
 
 app.set('port', (process.env.PORT || 5000));
@@ -29,6 +30,7 @@ app.get('/admin', function (req, res) {
 });
 
 app.use('/api/patient', patient);
+app.use('/api/attachment', attachment);
 app.use('/api/user', user);
 
 app.listen(app.get('port'), function () {
