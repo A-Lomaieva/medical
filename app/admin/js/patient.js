@@ -22,22 +22,44 @@ angular.module('Medical')
     };
     $scope.fetch();
 
-    $scope.add = () => {
-      if ($scope.form.$valid) {
-        var patient = new Patient($scope.newItem);
-        patient.$save(() => {
-          $scope.fetch();
-          $scope.newItem = {};
-        });
-      } else {
-        alert('Invalid form!');
-      }
-    };
-
     $scope.delete = (item) => {
       if (confirm('Are you sure?')) {
         var patient = new Patient(item);
         patient.$delete($scope.fetch);
       }
+    };
+
+    $scope.save = (item) => {
+      var patient = new Patient(item);
+      patient.$save(() => {
+        $scope.fetch();
+        if (!item.id) { scope.newItem = {}; }
+      });
+    };
+  }])
+  .directive('patientRow', function() {
+    return {
+      replace: true,
+      scope: {
+        item: '=patientRow',
+        onSave: '=onSave',
+        'delete': '=delete'
+      },
+      template: '<tr ng-form="form" ng-include="isEditting ? \'views/patient-form.html\' : \'views/patient-row.html\'"></tr>',
+      link: (scope) => {
+        scope.isEditting = !scope.item.id;
+
+        function initForm() {
+          scope.changedItem = angular.copy(scope.item);
+          scope.changedItem.birthdate = new Date(scope.changedItem.birthdate);
+        }
+
+        scope.toggleEdit = () => {
+          scope.isEditting = !scope.isEditting;
+          if (scope.isEditting) {
+            initForm();
+          }
+        };
+      }
     }
-  }]);
+  });

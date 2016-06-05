@@ -18,20 +18,20 @@ app.use('/js', express.static(__dirname + '/../node_modules/angular'));
 app.use('/js', express.static(__dirname + '/../node_modules/angular-route'));
 app.use('/js', express.static(__dirname + '/../node_modules/angular-resource'));
 
+app.use('/api/patient', patient);
+app.use('/api/attachment', attachment);
+app.use('/api/user', user);
+
 app.use('/admin', express.static(__dirname + '/admin'));
 
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.redirect('/admin');
 });
 
 app.get('/admin', function (req, res) {
   res.sendFile(__dirname + '/views/admin.html');
 });
-
-app.use('/api/patient', patient);
-app.use('/api/attachment', attachment);
-app.use('/api/user', user);
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));

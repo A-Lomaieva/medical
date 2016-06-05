@@ -1,0 +1,9 @@
+<td><a ng-href="#/patient/{{item.id}}/attachments">{{item.id}}</a></td>
+<td>{{item.name}}</td>
+<td>{{item.doctor}}</td>
+<td>{{item.hospitalCode}}</td>
+<td>{{item.birthdateFormatted}}</td>
+<td>{{item.diseases}}</td>
+<td>{{item.allergies}}</td>
+<td><button class="btn btn-success" ng-click="toggleEdit(item)">edit</button></td>
+<td><button class="btn btn-danger" ng-click="delete(item)">delete</button></td>

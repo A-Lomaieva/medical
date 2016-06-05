@@ -8,7 +8,7 @@ var moment = require('moment');
 
 function formatItem(item) {
   var date = moment(item.date);
-  item.date = date.format('MM/DD/YYYY');
+  item.dateFormatted = date.format('MM/DD/YYYY');
   return item;
 }
 

@@ -8,8 +8,17 @@ var moment = require('moment');
 
 function formatItem(item) {
   var date = moment(item.birthdate);
-  item.birthdate = date.format('MM/DD/YYYY');
-  return item;
+  return {
+    id: item.id,
+    name: item.name,
+    doctor: item.doctor,
+    hospitalCode: item.hospital_code,
+    cardUrl: item.card_url,
+    birthdate: item.birthdate,
+    birthdateFormatted: date.format('MM/DD/YYYY'),
+    diseases: item.diseases,
+    allergies: item.allergies
+  };
 }
 
 router
@@ -31,6 +40,10 @@ router
           res.json({success: true});
           done();
         });
+
+        query.on('error', function() {
+          res.status(500).send('Oops!');
+        })
       });
     });
   })
