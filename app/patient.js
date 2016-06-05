@@ -15,7 +15,7 @@ function formatItem(item) {
     hospitalCode: item.hospital_code,
     cardUrl: item.card_url,
     birthdate: item.birthdate,
-    birthdateFormatted: date.format('MM/DD/YYYY'),
+    birthdateFormatted: date.format('DD/MM/YYYY'),
     diseases: item.diseases,
     allergies: item.allergies
   };

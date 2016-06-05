@@ -8,14 +8,13 @@ var moment = require('moment');
 
 function formatItem(item) {
   var date = moment(item.date);
-  item.dateFormatted = date.format('MM/DD/YYYY');
   return {
     id: item.id,
     name: item.name,
     patientId: item.patientId,
     url: item.url,
     date: item.date,
-    dateFormatted: date.format('MM/DD/YYYY')
+    dateFormatted: date.format('DD/MM/YYYY')
   };
 }
 
