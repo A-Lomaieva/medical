@@ -14,9 +14,12 @@ angular.module('Medical')
     }
     $scope.patientId = $routeParams.id;
     $scope.items = [];
-    $scope.newItem = {
-      patientId: $scope.patientId
-    };
+    function resetItem() {
+      $scope.newItem = {
+        patientId: $scope.patientId
+      };
+    }
+    resetItem();
 
     $scope.fetch = () => {
       Attachment.query({patientId: $routeParams.id}, (data) => {
@@ -30,7 +33,7 @@ angular.module('Medical')
         var patient = new Attachment($scope.newItem);
         patient.$save(() => {
           $scope.fetch();
-          $scope.newItem = {};
+          resetItem();
         });
       } else {
         alert('Invalid form!');

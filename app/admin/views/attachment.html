@@ -35,10 +35,10 @@
       <td class="form-group" ng-class="{ 'has-error': form.name.$invalid }">
         <input type="text" class="form-control" placeholder="Name" name="name" ng-model="newItem.name" required>
       </td>
-      <td class="form-group" ng-class="{ 'has-error': form.doctor.$invalid }">
-        <input type="text" class="form-control" placeholder="Url" name="url" ng-model="newItem.url" required>
+      <td class="form-group">
+        <input type="text" class="form-control" placeholder="Url" name="url" ng-model="newItem.url">
       </td>
-      <td class="form-group" ng-class="{ 'has-error': form.birthdate.$invalid }">
+      <td class="form-group">
         <input type="date" class="form-control" placeholder="Date" name="date" ng-model="newItem.date">
       </td>
       <td>
