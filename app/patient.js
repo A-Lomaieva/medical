@@ -17,7 +17,11 @@ function formatItem(item) {
     birthdate: item.birthdate,
     birthdateFormatted: date.format('DD/MM/YYYY'),
     diseases: item.diseases,
-    allergies: item.allergies
+    allergies: item.allergies,
+    bloodType: item.blood_type,
+    rhesus: item.rhesus,
+    gender: item.gender,
+    phoneNumber: item.phone_number
   };
 }
 
