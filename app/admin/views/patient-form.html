@@ -1,26 +1,29 @@
 <td></td>
 <td class="form-group" ng-class="{ 'has-error': form.name.$invalid }">
-  <input type="text" class="form-control" placeholder="Name" name="name" ng-model="changedItem.name" required>
+  <input type="text" class="form-control" placeholder="Iм'я" name="name" ng-model="changedItem.name" required>
 </td>
 <td class="form-group" ng-class="{ 'has-error': form.doctor.$invalid }">
-  <input type="text" class="form-control" placeholder="Doctor" name="doctor" ng-model="changedItem.doctor" required>
+  <input type="text" class="form-control" placeholder="Доктор" name="doctor" ng-model="changedItem.doctor" required>
 </td>
 <td class="form-group" ng-class="{ 'has-error': form.hospitalCode.$invalid }">
-  <input type="text" class="form-control" placeholder="Hospital Code" name="hospitalCode" ng-model="changedItem.hospitalCode" required>
+  <input type="text" class="form-control" placeholder="Код ЛЗ" name="hospitalCode" ng-model="changedItem.hospitalCode" required>
 </td>
 <td class="form-group" ng-class="{ 'has-error': form.birthdate.$invalid }">
-  <input type="date" class="form-control" placeholder="Birthdate" name="birthdate" ng-model="changedItem.birthdate">
+  <input type="date" class="form-control" placeholder="Дата нарождення" name="birthdate" ng-model="changedItem.birthdate">
 </td>
 <td class="form-group" ng-class="{ 'has-error': form.diseases.$invalid }">
-  <input type="text" class="form-control" placeholder="Diseases" name="diseases" ng-model="changedItem.diseases">
+  <input type="text" class="form-control" placeholder="Хвороби" name="diseases" ng-model="changedItem.diseases">
 </td>
 <td class="form-group" ng-class="{ 'has-error': form.allergies.$invalid }">
-  <input type="text" class="form-control" placeholder="Allergies" name="allergies" ng-model="changedItem.allergies">
+  <input type="text" class="form-control" placeholder="Алергії" name="allergies" ng-model="changedItem.allergies">
+</td>
+<td class="form-group">
+  <button class="btn btn-default">завантажити картку</button>
 </td>
 <td>
-  <button ng-if="changedItem.id" class="btn btn-primary" ng-click="form.$valid && onSave(changedItem)">save</button>
-  <button ng-if="!changedItem.id" class="btn btn-primary" ng-click="onSave(changedItem)">add</button>
+  <button ng-if="changedItem.id" class="btn btn-primary" ng-click="form.$valid && onSave(changedItem)">зберегти</button>
+  <button ng-if="!changedItem.id" class="btn btn-primary" ng-click="onSave(changedItem)">додати</button>
 </td>
 <td>
-  <button class="btn btn-default" ng-click="toggleEdit()" ng-if="changedItem.id">cancel</button>
+  <button class="btn btn-default" ng-click="toggleEdit()" ng-if="changedItem.id">скасувати</button>
 </td>

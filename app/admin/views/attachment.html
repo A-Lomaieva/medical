@@ -1,24 +1,23 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#/">Medical</a>
+      <a class="navbar-brand" href="#/">Головна</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#/patient">Patients</a></li>
-      <li><a href="#/users">Users</a></li>
+      <li class="active"><a href="#/patient">Пацієнти</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="attachment">
-  <h3>Attachments for Patient {{patientId}}</h3>
+  <h3>Додатки пацієнта {{patientId}}</h3>
   <table class="table table-striped">
     <thead>
     <tr>
       <td>ID</td>
-      <td>Name</td>
-      <td>Url</td>
-      <td>Date</td>
+      <td>Iм'я</td>
+      <td>URL</td>
+      <td>Дата завантаження</td>
       <td></td>
     </tr>
     </thead>
@@ -28,21 +27,20 @@
       <td>{{item.name}}</td>
       <td>{{item.url}}</td>
       <td>{{item.dateFormatted}}</td>
-      <td><button class="btn btn-danger" ng-click="delete(item)">delete</button></td>
+      <td><button class="btn btn-danger" ng-click="delete(item)">видалити</button></td>
     </tr>
     <tr ng-form="form">
       <td></td>
       <td class="form-group" ng-class="{ 'has-error': form.name.$invalid }">
-        <input type="text" class="form-control" placeholder="Name" name="name" ng-model="newItem.name" required>
+        <input type="text" class="form-control" placeholder="Iм'я" name="name" ng-model="newItem.name" required>
       </td>
       <td class="form-group">
-        <input type="text" class="form-control" placeholder="Url" name="url" ng-model="newItem.url">
+        <button class="btn btn-default">завантажити файл</button>
       </td>
       <td class="form-group">
-        <input type="date" class="form-control" placeholder="Date" name="date" ng-model="newItem.date">
       </td>
       <td>
-        <button class="btn btn-primary" ng-click="add()">Add</button>
+        <button class="btn btn-primary" ng-click="add()">додати</button>
       </td>
     </tr>
     </tbody>
