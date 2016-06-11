@@ -12,11 +12,6 @@ router
     parsePost(req, (data) => {
       dbConnect((client) => {
 
-        // bcrypt.hash(data.password, salt, (err, hash) => {
-        //   console.log(`'${hash}'`);
-        //   done();
-        // });
-
         var query = client.query("SELECT * FROM users WHERE username = $1", [data.username]);
 
         query.on('row', function (row) {
