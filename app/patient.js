@@ -100,32 +100,35 @@ router
     });
   })
   .post('/:id', function (req, res) {
-    var id = req.params.id;
-    parsePost(req, (data) => {
-      dbConnect((client) => {
-        function done() {
-          client.end();
-          res.end();
-        }
+    // var id = req.params.id;
 
-        var query = client.query(
-          "UPDATE patient " +
-          "SET name=($1), doctor=($2), hospital_code=($3), diseases=($4), birthdate=($5), allergies=($6) " +
-          "WHERE id=($7)",
-          [
-            data.name, data.doctor, data.hospitalCode, data.diseases, data.birthdate, data.allergies,
-            id
-          ]
-        );
-
-        query.on('end', function () {
-          res.json({success: true});
-          done();
-        });
-
-        dbConnect.catchError(query, res);
-      });
-    });
+    res.json({success: true});
+    res.end();
+    // parsePost(req, (data) => {
+    //   dbConnect((client) => {
+    //     function done() {
+    //       client.end();
+    //       res.end();
+    //     }
+    //
+    //     var query = client.query(
+    //       "UPDATE patient " +
+    //       "SET name=($1), doctor=($2), hospital_code=($3), diseases=($4), birthdate=($5), allergies=($6) " +
+    //       "WHERE id=($7)",
+    //       [
+    //         data.name, data.doctor, data.hospitalCode, data.diseases, data.birthdate, data.allergies,
+    //         id
+    //       ]
+    //     );
+    //
+    //     query.on('end', function () {
+    //       res.json({success: true});
+    //       done();
+    //     });
+    //
+    //     dbConnect.catchError(query, res);
+    //   });
+    // });
   })
   .delete('/:id', function (req, res) {
     var id = req.params.id;
